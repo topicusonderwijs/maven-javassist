@@ -25,7 +25,7 @@
 
   <groupId>nl.topicus.plugins</groupId>
   <artifactId>javassist-maven-plugin-parent</artifactId>
-  <version>3.1</version>
+  <version>3.2-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>Maven Javassist Plugin Parent</name>
 
@@ -42,7 +42,7 @@
   <scm>
     <connection>scm:git:git://github.com/topicusonderwijs/maven-javassist.git</connection>
     <developerConnection>scm:git:git@github.com:topicusonderwijs/maven-javassist.git</developerConnection>
-    <tag>javassist-maven-plugin-parent-3.1</tag>
+    <tag></tag>
     <url>git://github.com/topicusonderwijs/maven-javassist.git</url>
   </scm>
   <distributionManagement>

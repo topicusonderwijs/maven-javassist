@@ -69,7 +69,7 @@ public class ClassNameJarIterator implements ClassFileIterator {
     @Override
     public String next() {
         String ret = classFiles.next().replace(File.separator, ".");
-        return ret.substring(0, ret.length() - 5);
+        return ret.substring(0, ret.length() - 6);
     }
 
     @Override

@@ -1,7 +1,27 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
 package nl.topicus.plugins.maven.javassist;
 
 import java.io.File;
-import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -9,64 +29,56 @@ import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;
 
+import com.google.common.io.Files;
 import org.sonatype.plexus.build.incremental.BuildContext;
 
-import com.google.common.io.Files;
-
 public class ClassNameJarIterator implements ClassFileIterator {
-	private Iterator<String> classFiles = new ArrayList<String>().iterator();
-	private File jarFile;
+    private Iterator<String> classFiles = new ArrayList<String>().iterator();
+    private Path jarFile;
 
-	public ClassNameJarIterator(final String classPath,
-			final BuildContext buildContext) {
+    public ClassNameJarIterator(final Path classPath, final BuildContext buildContext) throws IOException {
 
-		jarFile = new File(classPath);
-		if (buildContext.hasDelta(classPath)) {
-			List<String> classNames = new ArrayList<>();
-			try {
-				JarInputStream jarFileStream = new JarInputStream(
-						new FileInputStream(jarFile));
-				JarEntry jarEntry;
+        jarFile = classPath;
+        if (buildContext.hasDelta(classPath.toFile())) {
+            List<String> classNames = new ArrayList<>();
+            try (InputStream fis = java.nio.file.Files.newInputStream(jarFile);
+                    JarInputStream jarFileStream = new JarInputStream(fis)) {
+                JarEntry jarEntry;
 
-				while (true) {
-					jarEntry = jarFileStream.getNextJarEntry();
-					if (jarEntry == null)
-						break;
+                while (true) {
+                    jarEntry = jarFileStream.getNextJarEntry();
+                    if (jarEntry == null) {
+                        break;
+                    }
 
-					if (jarEntry.getName().endsWith(".class"))
-						classNames.add(jarEntry.getName()
-								.replaceAll("/", "\\."));
+                    if (jarEntry.getName().endsWith(".class")) {
+                        classNames.add(jarEntry.getName().replaceAll("/", "\\."));
+                    }
+                }
+            }
+            classFiles = classNames.iterator();
+        } else {
+            classFiles = Collections.emptyIterator();
+        }
+    }
 
-				}
+    @Override
+    public boolean hasNext() {
+        return classFiles.hasNext();
+    }
 
-				jarFileStream.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			classFiles = classNames.iterator();
-		} else {
-			classFiles = Collections.emptyIterator();
-		}
-	}
+    @Override
+    public String next() {
+        return Files.getNameWithoutExtension(classFiles.next()).replace(File.separator, ".");
+    }
 
-	@Override
-	public boolean hasNext() {
-		return classFiles.hasNext();
-	}
+    @Override
+    public Path getLastFile() {
+        return jarFile;
+    }
 
-	@Override
-	public String next() {
-		return Files.getNameWithoutExtension(classFiles.next()).replace(
-				File.separator, ".");
-	}
-
-	@Override
-	public File getLastFile() {
-		return jarFile;
-	}
-
-	@Override
-	public void remove() {
-		classFiles.remove();
-	}
+    @Override
+    public void remove() {
+        classFiles.remove();
+    }
 }

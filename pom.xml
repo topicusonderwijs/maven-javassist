@@ -1,148 +1,158 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+   Licensed to the Apache Software Foundation (ASF) under one or more
+   contributor license agreements.  See the NOTICE file distributed with
+   this work for additional information regarding copyright ownership.
+   The ASF licenses this file to You under the Apache License, Version 2.0
+   (the "License"); you may not use this file except in compliance with
+   the License.  You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>org.sonatype.oss</groupId>
-		<artifactId>oss-parent</artifactId>
-		<version>7</version>
-	</parent>
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-plugins</artifactId>
+    <version>40</version>
+  </parent>
 
-	<prerequisites>
-		<maven>3.0.4</maven>
-	</prerequisites>
+  <groupId>nl.topicus.plugins</groupId>
+  <artifactId>javassist-maven-plugin-parent</artifactId>
+  <version>3.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>Maven Javassist Plugin Parent</name>
 
-	<groupId>nl.topicus.plugins</groupId>
-	<artifactId>javassist-maven-plugin-parent</artifactId>
-	<packaging>pom</packaging>
-	<version>2.2-SNAPSHOT</version>
-	<name>Maven Javassist Plugin Parent</name>
+  <url>https://github.com/topicusonderwijs/maven-javassist</url>
 
-	<url>https://github.com/hielkehoeve/maven-javassist</url>
-	<scm>
-		<url>git://github.com/hielkehoeve/maven-javassist.git</url>
-		<connection>scm:git:git://github.com/hielkehoeve/maven-javassist.git</connection>
-		<developerConnection>scm:git:git@github.com:hielkehoeve/maven-javassist.git</developerConnection>
-	</scm>
+  <prerequisites>
+    <maven>3.0.4</maven>
+  </prerequisites>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<javassist.version>3.27.0-GA</javassist.version>
-		<slf4j.version>1.7.30</slf4j.version>
-		<guava.version>30.1.1-jre</guava.version>
-		<commons.io.version>2.8.0</commons.io.version>
-		<plexus.version>0.0.7</plexus.version>
+  <modules>
+    <module>javassist-maven-plugin-core</module>
+    <module>javassist-maven-plugin</module>
+  </modules>
+  <scm>
+    <connection>scm:git:git://github.com/topicusonderwijs/maven-javassist.git</connection>
+    <developerConnection>scm:git:git@github.com:topicusonderwijs/maven-javassist.git</developerConnection>
+    <url>git://github.com/topicusonderwijs/maven-javassist.git</url>
+  </scm>
 
-		<maven.version>3.6.3</maven.version>
-		<maven-annotations-plugin.version>3.6.0</maven-annotations-plugin.version>
-		<maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
-		<maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
-		<maven-plugin-plugin.version>3.6.0</maven-plugin-plugin.version>
-	</properties>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <javassist.version>3.29.2-GA</javassist.version>
+    <slf4j.version>2.0.7</slf4j.version>
+    <guava.version>32.1.2-jre</guava.version>
+    <commons.io.version>2.13.0</commons.io.version>
+    <plexus.version>1.2.0</plexus.version>
+    <maven.version>3.9.4</maven.version>
+  </properties>
 
-	<modules>
-		<module>javassist-maven-plugin-core</module>
-		<module>javassist-maven-plugin</module>
-	</modules>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.apache.maven</groupId>
+        <artifactId>maven-plugin-api</artifactId>
+        <version>${maven.version}</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.maven</groupId>
+        <artifactId>maven-core</artifactId>
+        <version>${maven.version}</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>nl.topicus.plugins</groupId>
+        <artifactId>javassist-maven-plugin-core</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>nl.topicus.plugins</groupId>
+        <artifactId>javassist-maven-plugin</artifactId>
+        <version>${project.version}</version>
+      </dependency>
 
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>org.apache.maven</groupId>
-				<artifactId>maven-plugin-api</artifactId>
-				<version>${maven.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.maven</groupId>
-				<artifactId>maven-core</artifactId>
-				<version>${maven.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.maven.plugin-tools</groupId>
-				<artifactId>maven-plugin-annotations</artifactId>
-				<version>${maven-annotations-plugin.version}</version>
-				<scope>provided</scope>
-			</dependency>
+      <dependency>
+        <groupId>org.javassist</groupId>
+        <artifactId>javassist</artifactId>
+        <version>${javassist.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>commons-io</groupId>
+        <artifactId>commons-io</artifactId>
+        <version>${commons.io.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>${slf4j.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.google.guava</groupId>
+        <artifactId>guava</artifactId>
+        <version>${guava.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.codehaus.plexus</groupId>
+        <artifactId>plexus-build-api</artifactId>
+        <version>${plexus.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
-			<dependency>
-				<groupId>nl.topicus.plugins</groupId>
-				<artifactId>javassist-maven-plugin-core</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>nl.topicus.plugins</groupId>
-				<artifactId>javassist-maven-plugin</artifactId>
-				<version>${project.version}</version>
-			</dependency>
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-plugin-plugin</artifactId>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-gpg-plugin</artifactId>
+        </plugin>
 
-			<dependency>
-				<groupId>org.javassist</groupId>
-				<artifactId>javassist</artifactId>
-				<version>${javassist.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>commons-io</groupId>
-				<artifactId>commons-io</artifactId>
-				<version>${commons.io.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-api</artifactId>
-				<version>${slf4j.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.google.guava</groupId>
-				<artifactId>guava</artifactId>
-				<version>${guava.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.sonatype.plexus</groupId>
-				<artifactId>plexus-build-api</artifactId>
-				<version>${plexus.version}</version>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
-
-	<build>
-		<sourceDirectory>src/main/java</sourceDirectory>
-		<testSourceDirectory>src/test/java</testSourceDirectory>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-plugin-plugin</artifactId>
-					<version>${maven-plugin-plugin.version}</version>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-gpg-plugin</artifactId>
-					<version>${maven-gpg-plugin.version}</version>
-					<configuration>
-						<encoding>${project.build.sourceEncoding}</encoding>
-					</configuration>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<version>${maven-compiler-plugin.version}</version>
-					<configuration>
-						<source>1.7</source>
-						<target>1.7</target>
-						<showWarnings>true</showWarnings>
-						<showDeprecation>true</showDeprecation>
-						<encoding>${project.build.sourceEncoding}</encoding>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-gpg-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <configuration>
+            <source>1.8</source>
+            <target>1.8</target>
+            <showWarnings>true</showWarnings>
+            <showDeprecation>true</showDeprecation>
+            <encoding>${project.build.sourceEncoding}</encoding>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.rat</groupId>
+          <artifactId>apache-rat-plugin</artifactId>
+          <configuration>
+            <excludes>
+              <exclude>README.md</exclude>
+            </excludes>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-gpg-plugin</artifactId>
+      </plugin>
+    </plugins>
+    <sourceDirectory>src/main/java</sourceDirectory>
+    <testSourceDirectory>src/test/java</testSourceDirectory>
+  </build>
 </project>

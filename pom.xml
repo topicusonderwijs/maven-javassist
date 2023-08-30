@@ -42,7 +42,7 @@
   <scm>
     <connection>scm:git:git://github.com/topicusonderwijs/maven-javassist.git</connection>
     <developerConnection>scm:git:git@github.com:topicusonderwijs/maven-javassist.git</developerConnection>
-    <tag></tag>
+    <tag />
     <url>git://github.com/topicusonderwijs/maven-javassist.git</url>
   </scm>
   <distributionManagement>
@@ -64,7 +64,6 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <javassist.version>3.29.2-GA</javassist.version>
     <slf4j.version>2.0.7</slf4j.version>
-    <guava.version>32.1.2-jre</guava.version>
     <commons.io.version>2.13.0</commons.io.version>
     <plexus.version>1.2.0</plexus.version>
     <maven.version>3.9.4</maven.version>
@@ -109,11 +108,6 @@
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-api</artifactId>
         <version>${slf4j.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.google.guava</groupId>
-        <artifactId>guava</artifactId>
-        <version>${guava.version}</version>
       </dependency>
       <dependency>
         <groupId>org.codehaus.plexus</groupId>

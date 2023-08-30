@@ -49,7 +49,7 @@ public class ClassNameDirectoryIterator implements ClassFileIterator {
         final Path classFile = classFiles.next();
         lastFile = classFile;
         final String qualifiedFileName = classPath.relativize(classFile).toString();
-        return qualifiedFileName.replace(File.separator, ".").substring(0, qualifiedFileName.length() - 6);
+        return qualifiedFileName.replace(File.separator, ".").substring(0, qualifiedFileName.length() - 5);
     }
 
     @Override

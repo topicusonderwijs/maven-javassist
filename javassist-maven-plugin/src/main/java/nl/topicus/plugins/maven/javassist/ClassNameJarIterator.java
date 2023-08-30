@@ -29,7 +29,6 @@ import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;
 
-import com.google.common.io.Files;
 import org.sonatype.plexus.build.incremental.BuildContext;
 
 public class ClassNameJarIterator implements ClassFileIterator {
@@ -69,7 +68,8 @@ public class ClassNameJarIterator implements ClassFileIterator {
 
     @Override
     public String next() {
-        return Files.getNameWithoutExtension(classFiles.next()).replace(File.separator, ".");
+        String ret = classFiles.next().replace(File.separator, ".");
+        return ret.substring(0, ret.length() - 5);
     }
 
     @Override

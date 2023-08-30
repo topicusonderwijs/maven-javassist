@@ -27,6 +27,7 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -35,8 +36,6 @@ import javassist.CtClass;
 import javassist.LoaderClassPath;
 import javassist.NotFoundException;
 
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import org.apache.maven.artifact.DependencyResolutionRequiredException;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -173,7 +172,7 @@ public class JavassistMojo extends AbstractMojo implements ILogger {
     }
 
     private ClassFileIterator createClassNameIterator(final String classPathStr) throws MojoExecutionException {
-        Path classPath = Path.of(classPathStr);
+        Path classPath = Paths.get(classPathStr);
         try {
             if (Files.isDirectory(classPath)) {
                 return new ClassNameDirectoryIterator(classPath, buildContext);
@@ -186,9 +185,9 @@ public class JavassistMojo extends AbstractMojo implements ILogger {
     }
 
     private List<String> getCompileClasspathElements() throws DependencyResolutionRequiredException {
-        List<?> ret = project.getCompileClasspathElements();
+        List<String> ret = project.getCompileClasspathElements();
         ret.remove(project.getBuild().getOutputDirectory());
-        return Lists.newArrayList(Iterables.filter(ret, String.class));
+        return ret;
     }
 
     protected ClassTransformer instantiateTransformerClass() throws MojoExecutionException {

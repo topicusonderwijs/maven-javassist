@@ -42,6 +42,7 @@
   <scm>
     <connection>scm:git:git://github.com/topicusonderwijs/maven-javassist.git</connection>
     <developerConnection>scm:git:git@github.com:topicusonderwijs/maven-javassist.git</developerConnection>
+    <tag />
     <url>git://github.com/topicusonderwijs/maven-javassist.git</url>
   </scm>
   <distributionManagement>

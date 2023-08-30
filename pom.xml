@@ -44,6 +44,20 @@
     <developerConnection>scm:git:git@github.com:topicusonderwijs/maven-javassist.git</developerConnection>
     <url>git://github.com/topicusonderwijs/maven-javassist.git</url>
   </scm>
+  <distributionManagement>
+    <repository>
+      <uniqueVersion>false</uniqueVersion>
+      <id>topicus-repo</id>
+      <name>topicus-repo.local-releases</name>
+      <url>https://repo.topicusonderwijs.nl/artifactory/libs-releases-local</url>
+    </repository>
+    <snapshotRepository>
+      <uniqueVersion>false</uniqueVersion>
+      <id>topicus-repo</id>
+      <name>topicus-repo.local-snapshots</name>
+      <url>https://repo.topicusonderwijs.nl/artifactory/libs-snapshots-local</url>
+    </snapshotRepository>
+  </distributionManagement>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

@@ -20,7 +20,7 @@
   <parent>
     <groupId>org.apache.maven.plugins</groupId>
     <artifactId>maven-plugins</artifactId>
-    <version>40</version>
+    <version>42</version>
   </parent>
 
   <groupId>nl.topicus.plugins</groupId>
@@ -32,7 +32,7 @@
   <url>https://github.com/topicusonderwijs/maven-javassist</url>
 
   <prerequisites>
-    <maven>3.0.4</maven>
+    <maven>3.6.3</maven>
   </prerequisites>
 
   <modules>
@@ -42,7 +42,7 @@
   <scm>
     <connection>scm:git:git://github.com/topicusonderwijs/maven-javassist.git</connection>
     <developerConnection>scm:git:git@github.com:topicusonderwijs/maven-javassist.git</developerConnection>
-    <tag></tag>
+    <tag />
     <url>git://github.com/topicusonderwijs/maven-javassist.git</url>
   </scm>
   <distributionManagement>
@@ -62,11 +62,11 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <javassist.version>3.29.2-GA</javassist.version>
-    <slf4j.version>2.0.7</slf4j.version>
-    <commons.io.version>2.13.0</commons.io.version>
+    <javassist.version>3.30.2-GA</javassist.version>
+    <slf4j.version>2.0.13</slf4j.version>
+    <commons.io.version>2.16.1</commons.io.version>
     <plexus.version>1.2.0</plexus.version>
-    <maven.version>3.9.4</maven.version>
+    <maven.version>3.9.7</maven.version>
   </properties>
 
   <dependencyManagement>
